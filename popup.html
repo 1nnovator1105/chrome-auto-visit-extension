@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>Auto Visit</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>Auto Visit</h1>
+    <span id="status" class="pill">정지</span>
+  </header>
+
+  <section id="form">
+    <label for="urls">방문할 링크 <small>한 줄에 하나, 간격마다 전부 열림 · <code>#</code>은 무시</small></label>
+    <textarea id="urls" rows="7" spellcheck="false"
+      placeholder="https://example.com&#10;https://example.com/status&#10;# 주석은 건너뜀"></textarea>
+
+    <div class="row">
+      <label for="interval">방문 간격</label>
+      <input id="interval" type="number" min="1" step="1" value="1">
+      <select id="unit">
+        <option value="1">초</option>
+        <option value="60" selected>분</option>
+        <option value="3600">시간</option>
+      </select>
+      <small class="hint">최소 30초</small>
+    </div>
+
+    <label class="check">
+      <input id="background" type="checkbox" checked>
+      백그라운드 탭에서 열기 (보던 화면 유지)
+    </label>
+  </section>
+
+  <p id="error" class="error" hidden></p>
+
+  <div class="actions">
+    <button id="toggle" class="primary">시작</button>
+    <button id="visitNow" hidden>지금 전부 열기</button>
+  </div>
+
+  <section id="runInfo" hidden>
+    <dl>
+      <dt>마지막 방문</dt><dd id="current">-</dd>
+      <dt>다음 방문</dt><dd id="nextAt">-</dd>
+    </dl>
+  </section>
+
+  <section>
+    <div class="log-head">
+      <h2>방문 기록</h2>
+      <button id="clearLog" class="link">지우기</button>
+    </div>
+    <ol id="log" class="log"></ol>
+    <p id="logEmpty" class="muted">아직 기록이 없습니다.</p>
+  </section>
+
+  <script src="popup.js"></script>
+</body>
+</html>
